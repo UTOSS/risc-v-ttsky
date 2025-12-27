@@ -1,0 +1,3 @@
+[submodule ".submodules/utoss-risc-v"]
+	path = .submodules/utoss-risc-v
+	url = git@github.com:UTOSS/risc-v.git
