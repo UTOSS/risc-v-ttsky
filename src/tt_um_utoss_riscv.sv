@@ -5,6 +5,8 @@
 
 `default_nettype none
 
+`include "utoss-risc-v/src/types.svh"
+
 module tt_um_utoss_riscv (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
@@ -22,6 +24,29 @@ module tt_um_utoss_riscv (
   assign uio_oe  = 0;
 
   // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, rst_n, 1'b0};
+  wire         _unused = &{ena, 1'b0};
+
+  addr_t       memory__address;
+  data_t       memory__write_data;
+  logic  [3:0] memory__write_enable;
+  data_t       memory__read_data;
+
+  MA #( .SIZE ( 1024 ) )
+    memory
+      ( .clk          ( clk                  )
+      , .address      ( memory__address      )
+      , .write_data   ( memory__write_data   )
+      , .write_enable ( memory__write_enable )
+      , .read_data    ( memory__read_data    )
+      );
+
+  utoss_riscv core
+    ( .clk                 ( clk                  )
+    , .reset               ( ~rst_n               )
+    , .memory__address     ( memory__address      )
+    , .memory__write_data  ( memory__write_data   )
+    , .memory__write_enable( memory__write_enable )
+    , .memory__read_data   ( memory__read_data    )
+    );
 
 endmodule
