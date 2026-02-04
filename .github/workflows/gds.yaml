@@ -2,14 +2,14 @@ name: gds
 
 on:
   pull_request:
-    types: [labeled]
+    types: [labeled, synchronize]
   workflow_dispatch:
 
 jobs:
   gds:
     runs-on: ubuntu-24.04
-    # Only run when the 'run-gds' label is present or when manually triggered
-    if: github.event_name == 'workflow_dispatch' || github.event.label.name == 'run-gds'
+    # Only run when manually triggered or when the 'run-gds' label is present on the PR
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'run-gds')
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
