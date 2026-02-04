@@ -1,7 +1,6 @@
 name: gds
 
 on:
-  push:
   workflow_dispatch:
 
 jobs:
