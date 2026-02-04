@@ -2,10 +2,46 @@ name: gds
 
 on:
   pull_request:
-    types: [labeled, synchronize]
+    types: [opened, labeled, synchronize]
   workflow_dispatch:
 
 jobs:
+  notify:
+    runs-on: ubuntu-24.04
+    # Only run when a PR is opened
+    if: github.event.action == 'opened'
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Post GDS workflow notification
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const comment = `👋 Hello! Before merging this PR, you can use the \`run-gds\` label to start the GDS workflow.
+            
+            ⚠️ **Important:** The GDS workflow takes a long time (~1 hour) and consumes significant CI runtime quota.
+            
+            **Before running the GDS workflow:**
+            1. Make sure you've run the hardening command locally first:
+               \`\`\`bash
+               ./tt/tt_tool.py --harden
+               \`\`\`
+            2. Verify that the hardening command succeeded without errors
+            
+            **To run the GDS workflow:**
+            - Add the \`run-gds\` label to this PR
+            - The workflow will run automatically
+            - It will also re-run on subsequent pushes while the label remains attached
+            
+            📚 For more information about the hardening command, see the [TinyTapeout GDS Action](https://github.com/TinyTapeout/tt-gds-action/blob/0d3300e15eda42ae3a24a2bd36433bdd20b32a9f/action.yml#L101-L103).`;
+            
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
   gds:
     runs-on: ubuntu-24.04
     # Only run when manually triggered or when the 'run-gds' label is present on the PR
