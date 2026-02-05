@@ -1,6 +1,9 @@
 name: gds
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     types: [opened, labeled, synchronize]
   workflow_dispatch:
@@ -44,8 +47,8 @@ jobs:
 
   gds:
     runs-on: ubuntu-24.04
-    # Only run when manually triggered or when the 'run-gds' label is present on the PR
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.pull_request.labels.*.name, 'run-gds')
+    # Only run when manually triggered, on main branch, or when the 'run-gds' label is present on the PR
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'push' || contains(github.event.pull_request.labels.*.name, 'run-gds')
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
