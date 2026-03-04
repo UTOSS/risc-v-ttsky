@@ -13,5 +13,11 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Install sv2v
+        uses: ./.github/actions/install-sv2v
+
+      - name: sv2v
+        run: make sv2v
+
       - name: Build docs
         uses: TinyTapeout/tt-gds-action/docs@ttsky25b
