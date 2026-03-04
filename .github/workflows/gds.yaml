@@ -21,23 +21,23 @@ jobs:
         with:
           script: |
             const comment = `👋 Hello! Before merging this PR, you can use the \`run-gds\` label to start the GDS workflow.
-            
+
             ⚠️ **Important:** The GDS workflow takes a long time (~1 hour) and consumes significant CI runtime quota.
-            
+
             **Before running the GDS workflow:**
             1. Make sure you've run the hardening command locally first:
                \`\`\`bash
                ./tt/tt_tool.py --harden
                \`\`\`
             2. Verify that the hardening command succeeded without errors
-            
+
             **To run the GDS workflow:**
             - Add the \`run-gds\` label to this PR
             - The workflow will run automatically
             - It will also re-run on subsequent pushes while the label remains attached
-            
+
             📚 For more information about the hardening command, see the [TinyTapeout GDS Action](https://github.com/TinyTapeout/tt-gds-action/blob/0d3300e15eda42ae3a24a2bd36433bdd20b32a9f/action.yml#L101-L103).`;
-            
+
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
