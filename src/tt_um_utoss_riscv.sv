@@ -38,6 +38,13 @@ module tt_um_utoss_riscv (
 
   wire       tx_busy, rx_busy, rx_overrun, rx_frame;
 
+  addr_t core_addr;
+  data_t core_write_data;
+  logic [3:0] core_write_enable;
+
+  logic [31:0] dbg_regs [0:31];
+  addr_t       dbg_pc;
+
   uart  #(
         .DATA_WIDTH(8)
       , .CLK_HZ(50000000)
@@ -84,13 +91,6 @@ module tt_um_utoss_riscv (
       , .hold_core           ( hold_core        )
   );
 
-  addr_t core_addr;
-  data_t core_write_data;
-  logic [3:0] core_write_enable;
-
-  logic [31:0] dbg_regs [0:31];
-  addr_t       dbg_pc;
-
   wire core_reset = rst_n | hold_core;
 
   addr_t bus_addr;
@@ -117,6 +117,8 @@ module tt_um_utoss_riscv (
     , .memory__write_data  ( core_write_data      )
     , .memory__write_enable( core_write_enable    )
     , .memory__read_data   ( read_data            )
+    , .dbg_regs            ( dbg_regs             )
+    , .dbg_pc              ( dbg_pc               )
     );
 
 endmodule
