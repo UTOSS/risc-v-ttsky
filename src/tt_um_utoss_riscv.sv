@@ -8,6 +8,10 @@
 `include "utoss-risc-v/src/types.svh"
 
 module tt_um_utoss_riscv (
+`ifdef USE_POWER_PINS
+    input             VPWR,
+    input             VGND,
+`endif
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
@@ -17,12 +21,6 @@ module tt_um_utoss_riscv (
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
-
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uo_out  = memory__address[7:0];  // Example: ou_out is the sum of ui_in and uio_in
-  assign uio_out = 0;
-  assign uio_oe  = 0;
-
   // List all unused inputs to prevent warnings
   wire         _unused = &{ena, 1'b0};
 
@@ -30,10 +28,22 @@ module tt_um_utoss_riscv (
   data_t       memory__write_data;
   logic  [3:0] memory__write_enable;
   data_t       memory__read_data;
+  
+  // All output pins must be assigned. If not used, assign to 0.
+  assign uo_out  = memory__address[7:0];  // Example: ou_out is the sum of ui_in and uio_in
+  assign uio_out = 0;
+  assign uio_oe  = 0;
+
+
 
   MA #( .SIZE ( 16 ) )
     memory
-      ( .clk          ( clk                  )
+      ( 
+`ifdef USE_POWER_PINS
+        .VPWR         (VPWR                  ),
+        .VGND        (VGND                   ),
+`endif
+        .clk          ( clk                  )
       , .address      ( memory__address      )
       , .write_data   ( memory__write_data   )
       , .write_enable ( memory__write_enable )

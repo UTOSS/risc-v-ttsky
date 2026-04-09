@@ -13,8 +13,7 @@
 
   "//": "PL_TARGET_DENSITY_PCT - You can increase this if Global Placement fails with error GPL-0302.",
   "//": "Users have reported that values up to 80 worked well for them.",
-  "PL_TARGET_DENSITY_PCT": 66,
-
+  "PL_TARGET_DENSITY_PCT":66,
   "//": "CLOCK_PERIOD - Increase this in case you are getting setup time violations.",
   "//": "The value is in nanoseconds, so 20ns == 50MHz.",
   "CLOCK_PERIOD": 20,
@@ -32,10 +31,50 @@
   "CLOCK_PORT": "clk",
 
   "//": "Configuration docs: https://librelane.readthedocs.io/en/latest/reference/configuration.html",
-
+  "RUN_IRDROP_REPORT": false,
   "//": "Extra configutation",
   "VERILOG_INCLUDE_DIRS": ["src/utoss-risc-v"],
   "VERILOG_DEFINES": ["UTOSS_RISCV_HARDENING"],
+
+  "EXTRA_VERILOG_MODELS": ["dir::RAM32.sv"],
+  "FP_PDN_CHECK_NODES": false,
+  "FP_PDN_VOFFSET": 26.32,
+  "FP_PDN_CFG": "dir::pdn_cfg.tcl",
+
+  "MACROS": {
+    "RAM32": {
+      "instances": {
+        "memory.ram_macro": {
+          "location": [10, 10],
+          "orientation": "N"
+        }
+      },
+      "gds": ["dir::macros/RAM32.gds"],
+      "lef": ["dir::macros/RAM32.lef"],
+      "nl": ["dir::macros/RAM32.nl.v"],
+      "spef": {
+        "min_*": ["dir::macros/RAM32.min_.spef"],
+        "nom_*": ["dir::macros/RAM32.nom_.spef"],
+        "max_*": ["dir::macros/RAM32.max_.spef"]
+      },
+      "lib": {
+        "min_tt_025C_1v80": "dir::macros/RAM32.lib/min_tt_025C_1v80/RAM32__min_tt_025C_1v80.lib",
+        "nom_tt_025C_1v80": "dir::macros/RAM32.lib/nom_tt_025C_1v80/RAM32__nom_tt_025C_1v80.lib",
+        "max_tt_025C_1v80": "dir::macros/RAM32.lib/max_tt_025C_1v80/RAM32__max_tt_025C_1v80.lib",
+        "min_ff_n40C_1v95": "dir::macros/RAM32.lib/min_ff_n40C_1v95/RAM32__min_ff_n40C_1v95.lib",
+        "nom_ff_n40C_1v95": "dir::macros/RAM32.lib/nom_ff_n40C_1v95/RAM32__nom_ff_n40C_1v95.lib",
+        "max_ff_n40C_1v95": "dir::macros/RAM32.lib/max_ff_n40C_1v95/RAM32__max_ff_n40C_1v95.lib",
+        "min_ss_100C_1v60": "dir::macros/RAM32.lib/min_ss_100C_1v60/RAM32__min_ss_100C_1v60.lib",
+        "nom_ss_100C_1v60": "dir::macros/RAM32.lib/nom_ss_100C_1v60/RAM32__nom_ss_100C_1v60.lib",
+        "max_ss_100C_1v60": "dir::macros/RAM32.lib/max_ss_100C_1v60/RAM32__max_ss_100C_1v60.lib"
+      }
+    }
+  },
+
+  "//": "Limit routing to met4 for macro-friendly TT setup",
+  "RT_MAX_LAYER": "met4",
+  "//": "Only export pin area in LEF (without any connected nets)",
+  "MAGIC_LEF_WRITE_USE_GDS": true,
 
   "//": "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!",
   "//": "!!! DO NOT CHANGE ANYTHING BELOW THIS POINT !!!",
@@ -62,7 +101,8 @@
   "FP_IO_HLENGTH": 2,
   "FP_IO_VLENGTH": 2,
 
-  "FP_PDN_VPITCH": 38.87,
+  "//":"FP_PDN_VPITCH: 38.87",
+  "FP_PDN_VPITCH": 153.6,
 
   "//": "Clock",
   "RUN_CTS": 1,

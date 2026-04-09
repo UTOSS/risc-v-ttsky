@@ -1,0 +1,84 @@
+{
+  "//": "Only export pin area in LEF (without any connected nets)",
+  "PL_TARGET_DENSITY_PCT": 91,
+  "CLOCK_PERIOD": 20,
+  "PL_RESIZER_HOLD_SLACK_MARGIN": 0.1,
+  "GRT_RESIZER_HOLD_SLACK_MARGIN": 0.05,
+  "RUN_LINTER": 1,
+  "LINTER_INCLUDE_PDK_MODELS": 1,
+  "CLOCK_PORT": "clk",
+  "VERILOG_INCLUDE_DIRS": [
+    "src/utoss-risc-v"
+  ],
+  "VERILOG_DEFINES": [
+    "UTOSS_RISCV_HARDENING"
+  ],
+  "EXTRA_VERILOG_MODELS": [
+    "dir::RAM32.sv"
+  ],
+  "FP_PDN_CHECK_NODES": false,
+  "FP_PDN_VOFFSET": 26.32,
+  "FP_PDN_CFG": "dir::pdn_cfg.tcl",
+  "MACROS": {
+    "RAM32": {
+      "instances": {
+        "memory.ram_macro": {
+          "location": [
+            10,
+            10
+          ],
+          "orientation": "N"
+        }
+      },
+      "gds": [
+        "dir::macros/RAM32.gds"
+      ],
+      "lef": [
+        "dir::macros/RAM32.lef"
+      ],
+      "nl": [
+        "dir::macros/RAM32.nl.v"
+      ],
+      "spef": {
+        "min_*": [
+          "dir::macros/RAM32.min_.spef"
+        ],
+        "nom_*": [
+          "dir::macros/RAM32.nom_.spef"
+        ],
+        "max_*": [
+          "dir::macros/RAM32.max_.spef"
+        ]
+      },
+      "lib": {
+        "min_tt_025C_1v80": "dir::macros/RAM32.lib/min_tt_025C_1v80/RAM32__min_tt_025C_1v80.lib",
+        "nom_tt_025C_1v80": "dir::macros/RAM32.lib/nom_tt_025C_1v80/RAM32__nom_tt_025C_1v80.lib",
+        "max_tt_025C_1v80": "dir::macros/RAM32.lib/max_tt_025C_1v80/RAM32__max_tt_025C_1v80.lib",
+        "min_ff_n40C_1v95": "dir::macros/RAM32.lib/min_ff_n40C_1v95/RAM32__min_ff_n40C_1v95.lib",
+        "nom_ff_n40C_1v95": "dir::macros/RAM32.lib/nom_ff_n40C_1v95/RAM32__nom_ff_n40C_1v95.lib",
+        "max_ff_n40C_1v95": "dir::macros/RAM32.lib/max_ff_n40C_1v95/RAM32__max_ff_n40C_1v95.lib",
+        "min_ss_100C_1v60": "dir::macros/RAM32.lib/min_ss_100C_1v60/RAM32__min_ss_100C_1v60.lib",
+        "nom_ss_100C_1v60": "dir::macros/RAM32.lib/nom_ss_100C_1v60/RAM32__nom_ss_100C_1v60.lib",
+        "max_ss_100C_1v60": "dir::macros/RAM32.lib/max_ss_100C_1v60/RAM32__max_ss_100C_1v60.lib"
+      }
+    }
+  },
+  "RT_MAX_LAYER": "met4",
+  "MAGIC_LEF_WRITE_USE_GDS": true,
+  "RUN_KLAYOUT_XOR": 0,
+  "RUN_KLAYOUT_DRC": 0,
+  "DESIGN_REPAIR_BUFFER_OUTPUT_PORTS": 0,
+  "TOP_MARGIN_MULT": 1,
+  "BOTTOM_MARGIN_MULT": 1,
+  "LEFT_MARGIN_MULT": 6,
+  "RIGHT_MARGIN_MULT": 6,
+  "FP_SIZING": "absolute",
+  "GRT_ALLOW_CONGESTION": 1,
+  "FP_IO_HLENGTH": 2,
+  "FP_IO_VLENGTH": 2,
+  "FP_PDN_VPITCH": 153.6,
+  "RUN_CTS": 1,
+  "FP_PDN_MULTILAYER": 0,
+  "MAGIC_DEF_LABELS": 0,
+  "MAGIC_WRITE_LEF_PINONLY": 1
+}
