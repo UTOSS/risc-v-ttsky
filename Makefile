@@ -5,7 +5,7 @@ INCLUDE_FLAGS := -I src/utoss-risc-v/
 DEFINE_FLAGS := -DUTOSS_RISCV_HARDENING
 V_FILES := $(SV_FILES:.sv=.sv2v.v)
 
-.PHONY: sv2v clean help
+.PHONY: sv2v tt clean help
 
 sv2v:
 	@mkdir -p .sv2v_temp
@@ -17,6 +17,10 @@ sv2v:
 		fi; \
 	done
 	@rm -rf .sv2v_temp
+
+tt: sv2v
+	./tt/tt_tool.py --create-user-config
+	./tt/tt_tool.py --harden
 
 clean:
 	@rm -f $(V_FILES)
