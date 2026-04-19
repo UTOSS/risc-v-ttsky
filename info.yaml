@@ -19,7 +19,7 @@ project:
   source_files:
     - "tt_um_utoss_riscv.sv2v.v"
     - "MA.sv2v.v"
-    - "utoss-risc-v/src/ALU_ALUdecoder/ALU.sv"
+    - "utoss-risc-v/src/ALU_ALUdecoder/ALU.sv2v.v"
     - "utoss-risc-v/src/ALU_ALUdecoder/ALUdecoder.sv2v.v"
     - "utoss-risc-v/src/ControlFSM.sv2v.v"
     - "utoss-risc-v/src/fetch.sv2v.v"
