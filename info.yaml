@@ -8,7 +8,7 @@ project:
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
   # How many tiles your design occupies? A single tile is about 167x108 uM.
-  tiles: "4x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
+  tiles: "8x2"          # Valid values: 1x1, 1x2, 2x2, 3x2, 4x2, 6x2 or 8x2
 
   # Your top module name must start with "tt_um_". Make it unique by including your github username:
   top_module:  "tt_um_utoss_riscv"
@@ -17,19 +17,16 @@ project:
   # Source files must be in ./src and you must list each source file separately, one per line.
   # Don't forget to also update `PROJECT_SOURCES` in test/Makefile.
   source_files:
-    - "tt_um_utoss_riscv.sv"
-    - "MA.sv"
-    - "utoss-risc-v/src/ALU_ALUdecoder/ALU.v"
-    - "utoss-risc-v/src/ALU_ALUdecoder/ALUdecoder.sv"
-    - "utoss-risc-v/src/ControlFSM.sv"
-    - "utoss-risc-v/src/fetch.sv"
-    - "utoss-risc-v/src/Instruction_Decode/Instruction_Decode.sv"
-    - "utoss-risc-v/src/Instruction_Decode/MemoryLoader.sv"
-    - "utoss-risc-v/src/Instruction_Decode/RegisterFile.v"
-    - "utoss-risc-v/src/params.svh"
-    - "utoss-risc-v/src/types.svh"
-    - "utoss-risc-v/src/utils.svh"
-    - "utoss-risc-v/src/utoss_riscv.sv"
+    - "tt_um_utoss_riscv.sv2v.v"
+    - "MA.sv2v.v"
+    - "utoss-risc-v/src/ALU_ALUdecoder/ALU.sv2v.v"
+    - "utoss-risc-v/src/ALU_ALUdecoder/ALUdecoder.sv2v.v"
+    - "utoss-risc-v/src/ControlFSM.sv2v.v"
+    - "utoss-risc-v/src/fetch.sv2v.v"
+    - "utoss-risc-v/src/Instruction_Decode/Instruction_Decode.sv2v.v"
+    - "utoss-risc-v/src/Instruction_Decode/MemoryLoader.sv2v.v"
+    - "utoss-risc-v/src/Instruction_Decode/registerFile.v"
+    - "utoss-risc-v/src/utoss_riscv.sv2v.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).

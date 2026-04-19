@@ -6,7 +6,7 @@ SIM ?= icarus
 FST ?= -fst # Use more efficient FST format
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = tt_um_utoss_riscv.sv MA.sv utoss-risc-v/src/ALU_ALUdecoder/ALU.v utoss-risc-v/src/ALU_ALUdecoder/ALUdecoder.sv utoss-risc-v/src/ControlFSM.sv utoss-risc-v/src/fetch.sv utoss-risc-v/src/Instruction_Decode/Instruction_Decode.sv utoss-risc-v/src/Instruction_Decode/MemoryLoader.sv utoss-risc-v/src/Instruction_Decode/RegisterFile.v utoss-risc-v/src/params.svh utoss-risc-v/src/types.svh utoss-risc-v/src/utils.svh utoss-risc-v/src/utoss_riscv.sv
+PROJECT_SOURCES = tt_um_utoss_riscv.sv MA.sv utoss-risc-v/src/ALU_ALUdecoder/ALU.sv utoss-risc-v/src/ALU_ALUdecoder/ALUdecoder.sv utoss-risc-v/src/ControlFSM.sv utoss-risc-v/src/fetch.sv utoss-risc-v/src/Instruction_Decode/Instruction_Decode.sv utoss-risc-v/src/Instruction_Decode/MemoryLoader.sv utoss-risc-v/src/Instruction_Decode/registerFile.v utoss-risc-v/src/params.svh utoss-risc-v/src/types.svh utoss-risc-v/src/utils.svh utoss-risc-v/src/utoss_riscv.sv
 COMPILE_ARGS += -DUTOSS_RISCV_HARDENING
 
 ifneq ($(GATES),yes)

@@ -23,6 +23,12 @@ jobs:
         shell: bash
         run: pip install -r test/requirements.txt
 
+      - name: Install sv2v
+        uses: ./.github/actions/install-sv2v
+
+      - name: sv2v
+        run: make sv2v
+
       - name: Run tests
         run: |
           cd test
